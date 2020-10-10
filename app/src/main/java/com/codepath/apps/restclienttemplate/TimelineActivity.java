@@ -3,11 +3,13 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -34,15 +36,22 @@ public class TimelineActivity extends AppCompatActivity {
     User mainUser;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    ImageView twitterLogo;
     EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
         client = TwitterApp.getRestClient(this);
         getMainUserInformation();
+        twitterLogo = findViewById(R.id.tbTwitterLogo);
+        twitterLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rvTweets.getLayoutManager().smoothScrollToPosition(rvTweets, new RecyclerView.State(), 0);
+            }
+        });
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

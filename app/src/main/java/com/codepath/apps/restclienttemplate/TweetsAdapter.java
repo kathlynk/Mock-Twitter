@@ -20,6 +20,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     Context context;
     List<Tweet> tweets;
+    int currPosition;
 
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
@@ -37,6 +38,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tweet tweet = tweets.get(position);
         holder.bind(tweet);
+        currPosition = position;
     }
 
     @Override
