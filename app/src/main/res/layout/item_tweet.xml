@@ -24,7 +24,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        tools:text="carolinar7771" />
+        android:textColor="#000000"
+        tools:text="Freddy" />
 
     <TextView
         android:id="@+id/tvBody"
@@ -53,6 +54,16 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/tvName"
+        android:text="@string/seperation_dot" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/tvScreenName"
-        android:text="·" />
+        tools:text="\@carolinar7771" />
 </RelativeLayout>
