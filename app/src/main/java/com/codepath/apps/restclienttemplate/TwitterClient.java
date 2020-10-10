@@ -58,4 +58,11 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("max_id", maxId);
 		client.get(apiUrl, params, handler);
 	}
+
+	public void getMainUserInformation(JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("account/verify_credentials.json");
+		RequestParams params = new RequestParams();
+		params.put("count", 1);
+		client.get(apiUrl, params, handler);
+	}
 }

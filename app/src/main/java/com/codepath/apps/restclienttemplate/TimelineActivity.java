@@ -8,12 +8,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ public class TimelineActivity extends AppCompatActivity {
     TwitterClient client;
     RecyclerView rvTweets;
     List<Tweet> tweets;
+    User mainUser;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
     EndlessRecyclerViewScrollListener scrollListener;
@@ -37,6 +42,7 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient(this);
+        getMainUserInformation();
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -64,6 +70,29 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.addOnScrollListener(scrollListener);
 
         pupulateHomeTimeline();
+    }
+
+    private void getMainUserInformation() {
+        client.getMainUserInformation(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG, "onSuccess for loadUserInfo!" + json.toString());
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    mainUser = User.fromJson(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ImageView tbProfileImage = (ImageView) findViewById(R.id.tbProfileImage);
+                Glide.with(TimelineActivity.this).load(mainUser.profileImageUrl).error(R.drawable.default_profile_image).
+                        circleCrop().into(tbProfileImage);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.i(TAG, "onFailure for loadUserInfo!", throwable);
+            }
+        });
     }
 
     private void loadMoreData() {
