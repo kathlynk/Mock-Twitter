@@ -14,6 +14,7 @@ public class Tweet {
     public String body;
     public String createdAt;
     public String formatedDate;
+    public String mediaImageUrl;
     public long id;
     public User user;
 
@@ -23,6 +24,14 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
+        JSONObject entities = jsonObject.getJSONObject("entities");
+        try {
+            JSONArray media = entities.getJSONArray("media");
+            JSONObject mediaObject = media.getJSONObject(0);
+            tweet.mediaImageUrl = mediaObject.getString("media_url_https");
+        } catch (Exception e) {
+            tweet.mediaImageUrl = null;
+        }
         tweet.formatedDate = TimeFormatter.getTimeDifference(tweet.createdAt);
         return tweet;
     }

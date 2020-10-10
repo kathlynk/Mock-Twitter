@@ -24,8 +24,10 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:maxLength="38"
+        android:maxLines="1"
         android:textColor="#000000"
-        tools:text="Freddy" />
+        tools:text="Management Leadership For Tomorrow" />
 
     <TextView
         android:id="@+id/tvBody"
@@ -68,4 +70,16 @@
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/tvScreenName"
         tools:text="\@carolinar7771" />
+
+    <ImageView
+        android:id="@+id/tvMediaImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:adjustViewBounds="true"
+        android:maxHeight="200dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </RelativeLayout>
