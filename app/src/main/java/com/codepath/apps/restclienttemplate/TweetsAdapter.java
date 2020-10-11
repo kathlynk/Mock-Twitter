@@ -86,8 +86,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 tvName.setText("@" + tweet.user.screenName);
             } else if (tweet.user.name.length() < 35) {
                 tvScreenName.setText(tweet.user.name);
+                tvName.setText("");
             } else {
                 tvScreenName.setText(tweet.user.name.substring(0, 36) + "...");
+                tvName.setText("");
             }
             Glide.with(context).load(tweet.user.profileImageUrl).circleCrop().into(ivProfileImage);
             Glide.with(context).load(tweet.mediaImageUrl).
