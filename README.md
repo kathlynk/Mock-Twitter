@@ -41,6 +41,7 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 <img src='https://imgur.com/CC4OUTu.gif'/>
+<img src='https://imgur.com/VcUMMTC.gif'/>
 
 ## Open-source libraries used
 
