@@ -13,6 +13,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="counterText" parent="TextAppearance.Design.Counter">
+        <item name="android:textColor">@color/twitter_blue</item>
+    </style>
+
+    <style name="counterOverride" parent="TextAppearance.Design.Counter.Overflow">
+        <item name="android:textColor">@color/medium_red</item>
+    </style>
+
     <color name="medium_green">#ff17bf63</color>
     <color name="medium_gray">#ffaab8c2</color>
     <color name="medium_gray_30">#4daab8c2</color>
